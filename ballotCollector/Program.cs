@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Https;
 using System.Security.Cryptography.X509Certificates;;
 var builder = WebApplication.CreateBuilder(args);
 
-var certPem = File.ReadAllText("pki/ballot_provider.cert.pem");
-var keyPem = File.ReadAllText("pki/ballot_provider.key.pem");
+var certPem = File.ReadAllText("pki/ballot_collector.cert.pem");
+var keyPem = File.ReadAllText("pki/ballot_collector.key.pem");
 var own = X509Certificate2.CreateFromPem(certPem, keyPem);
 var ca=X509Certificate2.CreateFromPem(File.ReadAllText("pki/my_ca-crt.pem"));
 

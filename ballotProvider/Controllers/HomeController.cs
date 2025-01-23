@@ -48,36 +48,7 @@ public class HomeController : Controller
     {
         return View(data);
     }
-    [HttpPost]
-
-    public void SubmitVote([FromBody]EncryptedBallot encrypted)
-    {
-        if (!ModelState.IsValid) { 
-
-                Console.WriteLine("Model state is invalid " );
-
-                foreach (var modelState in ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        Console.WriteLine(error.ErrorMessage);
-                    }
-                }
-
-         }
-       
-      Console.WriteLine("Received encrypted ballot: "+encrypted.EncryptedBallotData);
-      Console.WriteLine("Received encrypted key: "+encrypted.EncryptedKey);
-      Console.WriteLine("Received ivs: "+encrypted.Ivs);
-        Console.WriteLine("Received public key: "+encrypted.PublicKey);
-        Console.WriteLine("Received return address: "+encrypted.ReturnAddress);
-
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+    
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
