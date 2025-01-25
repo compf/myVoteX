@@ -38,6 +38,7 @@ public class HomeController : Controller
     public string GetPublicKey()
     {
         System.Security.Cryptography.RSA rsa = System.Security.Cryptography.RSA.Create();
+        rsa.ImportFromPem(System.IO.File.ReadAllText("../ballotCounter/pki/ballotcounter.pem"));
         var publicKey= rsa.ExportSubjectPublicKeyInfo();
         string key= Convert.ToBase64String(publicKey);
         Console.WriteLine("Public key: "+key);

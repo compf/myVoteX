@@ -38,6 +38,7 @@ public class HomeController : Controller
         Response.Headers.Add("Access-Control-Allow-Origin", "https://ballotprovider.compf.me:1997");
         Response.Headers.Add("Access-Control-Allow-Methods", "POST");
         Response.Headers.Add("Access-Control-Allow-Headers", "*");
+        System.IO.File.WriteAllText("out.json",System.Text.Json.JsonSerializer.Serialize(encrypted));
 
         if (!ModelState.IsValid)
         {
