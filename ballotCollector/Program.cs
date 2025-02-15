@@ -7,9 +7,6 @@ var keyPem = File.ReadAllText("pki/ballot_collector.key.pem");
 var own = X509Certificate2.CreateFromPem(certPem, keyPem);
 var ca=X509Certificate2.CreateFromPem(File.ReadAllText("pki/my_ca-crt.pem"));
 
-var chain=new X509Certificate2Collection();
-chain.Add(ca);
-chain.Add(own);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -14,7 +14,11 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-        Ballot ballot=new Ballot();
+        SimpleBallot ballot=new SimpleBallot(
+            GetPublicKey(),
+            "https://ballotcollector.compf.me:1998/Home/SubmitVote",
+            "1234"
+        );
         var erstStimme=new BallotGroup();
         erstStimme.Votes.Add("CDU",new BooleanVote());
         erstStimme.Votes.Add("SPD",new BooleanVote());
@@ -27,12 +31,8 @@ public class HomeController : Controller
         ballot.Groups.Add("Erststimme",erstStimme);
         ballot.Groups.Add("Zweitstimme",zweitStimme);
 
-        var envelope=new SimpleBallot();
-        envelope.Ballot=ballot;
-        envelope.BallotId="1234";
-        envelope.PublicKey=GetPublicKey();
-        envelope.ReturnAddress="https://ballotcollector.compf.me:1998/Home/SubmitVote";
-        data=envelope;
+
+        data=ballot;
     }
 
     public string GetPublicKey()

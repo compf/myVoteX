@@ -43,7 +43,6 @@ oikBZQKBgFzmL7x64v1bks8enSEND6YvGB3AKbU52i635BK8CoUMmZwMEGSpifOl
 6D9Z0MCXT8kf+Ls6eeKXzjrBxEQnOv78N8zxwUdCfhil3+v4Iiq1vH0GyjYuZaj6
 vbjk0rVPbTA2m6c8DG+Rtfo5njktXjR6bjitM5ZrkQ1YtR5ynkTy
 -----END RSA PRIVATE KEY-----
-
 ";
             rsa.ImportFromPem(inCode);
 
@@ -52,39 +51,47 @@ vbjk0rVPbTA2m6c8DG+Rtfo5njktXjR6bjitM5ZrkQ1YtR5ynkTy
         }
 
     }
-    private EncryptedBallot TestBallot()
+    private EncryptedBallot EncryptedTestBallot()
     {
+
+        const string ivs = "cWasy/lce+f7XiG/";
+        const string encryptedBallotData = "Q9wYKIqdOsbFpY5y3n18wMZnlwW0y4EqiYjFTlmVqTT5WiP9ZniXO6qZYoXEUEizd9ucHvOzcssGQRVh6cAFgJFUsI1Tp4tDau5pQ6dPIzY90kcjfFCna6tnsJ1IPzu6qJbezgiAM/bjI76k+fElzO0qDwDhyN5YGg==";
+        const string encryptedKey = "vERhnCBaLbBCdy9ChmdLEq2RS98+TI0oeGwFn0aHxY5zhBBNtEv0VnMib8Pw0X5WZmCwOud3I6qacc3zW5xtn0AFo8absS9vU0VGcxr1/CufqJ3gHzUIfIAjbvannPhk6JYkhI0pZDqhVr2OZBOQFpXNtFM6cd02u27drVrANKSmtF+XhNOZ8YEIomxj2FyVYUNXcIRurCw2WD03DSIyBX0+GpNmm0y6ebAgt/aTtYCF5q8wfxBZ3yIfn+X7mkJsTfb0DlLPwWr5eKqQTcIX3HF+d7/xYiG7+86SxDlQczcbSoAodRUvkulZt7s0EMw87hqer5Y3AupahFr9KUWmog==";
+        const string publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv0FSVWXjUGVzwqLbLo4V8m+l3gMJxQdboE2facaPfDfWJ7gKVcT4vg8HnMPdtH0f1gPMyc8maYeym/WUNIt2zFoKf6qCwCsW9NCBHYjIqa7xQoH0YwRY4F3ctawuxdzqZSHrolCGvFtoo7dDWTi88nLOYzOh2ZsTZUBAF+twAS0h75IjcbwH/IYt1olK4jxNqBzY4OkJcc4rF/oGexeoJUHaUaZvcYV7q5o2jIfE8b+riaeCAtIvAJgbxpqkg7iuDOeBfTpSrUnPdr4HfZwUr2i59nfXYgfZmLRXha9bklx607thqrsToyYHw2qgLyrMm3mjJdd9DSsHE/QFGWVoyQIDAQAB";
+        const string returnUrl = "https://ballotcollector.compf.me:1998/Home/SubmitVote";
+        const string ballotId = "1234";
+
 
 
         return new EncryptedBallot(
-            "cWasy/lce+f7XiG/",
-            "Q9wYKIqdOsbFpY5y3n18wMZnlwW0y4EqiYjFTlmVqTT5WiP9ZniXO6qZYoXEUEizd9ucHvOzcssGQRVh6cAFgJFUsI1Tp4tDau5pQ6dPIzY90kcjfFCna6tnsJ1IPzu6qJbezgiAM/bjI76k+fElzO0qDwDhyN5YGg==",
-            "vERhnCBaLbBCdy9ChmdLEq2RS98+TI0oeGwFn0aHxY5zhBBNtEv0VnMib8Pw0X5WZmCwOud3I6qacc3zW5xtn0AFo8absS9vU0VGcxr1/CufqJ3gHzUIfIAjbvannPhk6JYkhI0pZDqhVr2OZBOQFpXNtFM6cd02u27drVrANKSmtF+XhNOZ8YEIomxj2FyVYUNXcIRurCw2WD03DSIyBX0+GpNmm0y6ebAgt/aTtYCF5q8wfxBZ3yIfn+X7mkJsTfb0DlLPwWr5eKqQTcIX3HF+d7/xYiG7+86SxDlQczcbSoAodRUvkulZt7s0EMw87hqer5Y3AupahFr9KUWmog==",
-            "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv0FSVWXjUGVzwqLbLo4V8m+l3gMJxQdboE2facaPfDfWJ7gKVcT4vg8HnMPdtH0f1gPMyc8maYeym/WUNIt2zFoKf6qCwCsW9NCBHYjIqa7xQoH0YwRY4F3ctawuxdzqZSHrolCGvFtoo7dDWTi88nLOYzOh2ZsTZUBAF+twAS0h75IjcbwH/IYt1olK4jxNqBzY4OkJcc4rF/oGexeoJUHaUaZvcYV7q5o2jIfE8b+riaeCAtIvAJgbxpqkg7iuDOeBfTpSrUnPdr4HfZwUr2i59nfXYgfZmLRXha9bklx607thqrsToyYHw2qgLyrMm3mjJdd9DSsHE/QFGWVoyQIDAQAB",
-            "https://ballotcollector.compf.me:1998/Home/SubmitVote",
-            "1234"
+            ivs,
+            encryptedBallotData,
+            encryptedKey,
+            publicKey,
+            returnUrl,
+            ballotId
         );
     }
 
     [Test]
     public void TestBallotDecryption()
     {
-        var ballot = TestBallot();
+        var ballot = EncryptedTestBallot();
         var decrypted = ballot.Decrypt(new TestCryptoGenerator());
         Console.WriteLine(decrypted);
-        
+
         Assert.That(decrypted.Groups.Count, Is.EqualTo(2));
 
         Assert.That(decrypted.Groups.ContainsKey("Erststimme"));
         Assert.That(decrypted.Groups.ContainsKey("Zweitstimme"));
 
-        var group1=decrypted.Groups["Erststimme"];
+        var group1 = decrypted.Groups["Erststimme"];
         Assert.That(group1.Votes.ContainsKey("SPD"));
         Assert.That(group1.Votes["SPD"].CheckValidity(null));
 
-        var group2=decrypted.Groups["Zweitstimme"];
+        var group2 = decrypted.Groups["Zweitstimme"];
         Assert.That(group2.Votes.ContainsKey("SPD"));
         Assert.That(group2.Votes["SPD"].CheckValidity(null));
-        
+
     }
 }
