@@ -1,5 +1,9 @@
 ﻿namespace voteTest;
 using Model;
+using Model.Ballot;
+using Model.Crypto;
+using Model.Envelope;
+using Model.Vote;
 using NUnit.Framework;
 using System.Collections;
 using System.Security.Cryptography;
@@ -87,11 +91,13 @@ vbjk0rVPbTA2m6c8DG+Rtfo5njktXjR6bjitM5ZrkQ1YtR5ynkTy
 
         var group1 = decrypted.Groups["Erststimme"];
         Assert.That(group1.Votes.ContainsKey("SPD"));
-        Assert.That(group1.Votes["SPD"].CheckValidity(null));
 
         var group2 = decrypted.Groups["Zweitstimme"];
         Assert.That(group2.Votes.ContainsKey("SPD"));
-        Assert.That(group2.Votes["SPD"].CheckValidity(null));
+        var ballotValidityChecker =new TwoGroupsValidityChecker(new AllGroupsValidAggregator());
+        var ballotGroupValidityChecker =new OneVoteBallotGroupValidilityChecker();
+        var voteValidityChecker =new SimpleVoteValidityChecker();
+        Assert.That(decrypted.CheckValidity(ballotValidityChecker, ballotGroupValidityChecker, voteValidityChecker));
 
     }
 }
